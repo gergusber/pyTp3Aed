@@ -10,7 +10,6 @@ class Canciones:
         self.genero = gen
         self.reproducciones = repr
 
-
 def write(canciones):
     print('Titulo:', canciones.titulo, end=' ')
     print('Album:', canciones.album, end=' ')
@@ -30,7 +29,6 @@ def validate(inf):
 
     return n
 
-
 def read(canciones):
     n = len(canciones)
     for i in range(n):
@@ -41,7 +39,7 @@ def read(canciones):
         alb = input('Nombre del álbum: ')
         ban = input('Nombre de la banda: ')
         while lan < 0 or lan > 3 :
-            lan = int(input('Ingrese el idioma del 0 al 3: '))
+            lan = int(input('Ingrese el idioma del 0 al 3:(0: inglés, 1: español, 2: francés, 3: otros) '))
         while gen < 0 or gen > 9:
             gen = int(input('Ingrese el género del 0 al 9: '))
         while repr < 0:
@@ -51,19 +49,16 @@ def read(canciones):
 
         canciones[i] = Canciones(tit, alb, ban, lan, gen, repr)
 
-
-
 def sort(canciones):
     n = len(canciones)
     for i in range(n-1):
         for j in range(i+1, n):
             if canciones[i].titulo > canciones[j].titulo:
                 canciones[i], canciones[j] = canciones[j], canciones[i]
-
+    return canciones
 
 def display(canciones):
     n = len(canciones)
-    print('\nCanciones ordenadas alfabeticamente: ')
     for i in range(n):
         write(canciones[i])
 
@@ -74,7 +69,19 @@ def display_Test(canciones, x):
         if canciones[i].reproducciones >= x:
             write(canciones[i])
 
+def buscarEnDiscos(nombDisco,canciones):
+    n = len(canciones)
+    listaAlbums = []
+    for i in range(n):
+        if(nombDisco in canciones[i].album):
+            listaAlbums.append(canciones[i])
+    return listaAlbums
 
+def filtroPorNombreDisco(canciones):
+    nombDisco = input('Ingrese el nombre del disco: ')
+    while(nombDisco == '' or nombDisco == None ):
+        nombDisco = input('Ingrese el nombre del disco: ')
+    return buscarEnDiscos(nombDisco,canciones)
 
 def test():
     # cargar cantidad de canciones
@@ -87,26 +94,15 @@ def test():
     read(canciones)
     print()
 
-
     opcion = 0
     while opcion < 1 or opcion > 8:
         opcion = int(input("ERROR /// Se pidio que ingrese entre 1 y 8.\n>>>Ingrese:  "))
 
         if opcion == 1:
-            display(canciones)
-
-
-
-
-
-
-
-   # x = int(input("Ingrese para visualizar las canciones con >= reproducciones que: "))
-
-
-    #sort(canciones)
-
-   # display(canciones)
-
+            print('\nCanciones ordenadas alfabeticamente: ')
+            display(sort(canciones))
+        elif opcion == 2:
+            display(filtroPorNombreDisco(canciones))
+        
 
 test()

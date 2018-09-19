@@ -96,7 +96,7 @@ def test():
 
     opcion = 0
     while opcion < 1 or opcion > 8:
-        opcion = int(input("ERROR /// Se pidio que ingrese entre 1 y 8.\n>>>Ingrese:  "))
+        opcion = int(input("ERROR /// Se pidió que ingrese entre 1 y 8.\n>>>Ingrese:  "))
 
         if opcion == 1:
             print('\nCanciones ordenadas alfabeticamente: ')
